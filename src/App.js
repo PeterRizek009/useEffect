@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import './app.css'
 
-function App() {
+export default function App() {
+  const [name, setName] = useState("");
+  const [phone, setphone] = useState("");
+
+
+  // // useEffect(() => {
+  // //   console.log("useEffect will work on time ")
+  // // } , []);
+
+  useEffect(() => {
+    if(name || phone){
+    const debounceSearch =   setTimeout(() => {
+      }, 1200);
+     return() => {clearTimeout(debounceSearch)}
+    }
+  } , [name , phone]);
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <label>Name</label>
+      <input onChange={(e) => setName(e.target.value)} value={name} />
+      <br/>
+      <label>Phone</label>
+      <input onChange={(e) => setphone(e.target.value)} value={phone} />
+      <br/>
+
+      <p>
+        name : {name}
+        <br/>
+        phone : {phone}
+      </p>
     </div>
   );
 }
-
-export default App;
